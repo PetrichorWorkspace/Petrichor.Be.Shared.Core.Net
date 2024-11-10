@@ -1,5 +1,5 @@
 ﻿using Shared.Core.Domain.Rules.BaseEntityRules;
-using Shared.Core.Drivens.Validators.Base;
+using Shared.Core.Driven.Validators.Base;
 
 namespace Shared.Core.Domain.Entities;
 
@@ -7,7 +7,7 @@ public abstract class BaseEntity
 {
     public string Id { get; init; } = Guid.NewGuid().ToString();
     public DateTime CreatedAt { get; init; } = DateTime.Now;
-    public DateTime? LastUpdatedAt { get; set; } = default;
+    public DateTime? LastModifiedAt { get; set; } = default;
 }
 
 public abstract class BaseEntityRule<TEntity, TEntityRule> : BaseNoParamValidator<TEntity, TEntityRule> 

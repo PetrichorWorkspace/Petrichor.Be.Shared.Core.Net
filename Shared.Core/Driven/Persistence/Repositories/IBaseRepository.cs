@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Shared.Core.Domain.Entities;
 
-namespace Shared.Core.Drivens.Persistence.Repositories;
+namespace Shared.Core.Driven.Persistence.Repositories;
 
 public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 
-namespace Shared.Core.Drivens.Validators.Base;
+namespace Shared.Core.Driven.Validators.Base;
 
 /// <typeparam name="TVal">The type of the object being validated</typeparam>
 /// <typeparam name="TDerived">

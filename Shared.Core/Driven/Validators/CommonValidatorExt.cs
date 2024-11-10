@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Shared.Core.Drivens.Validators;
+namespace Shared.Core.Driven.Validators;
 
 public static class CommonValidatorExt
 {

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Shared.Core.Drivens.Validators.Base;
+using Shared.Core.Driven.Validators.Base;
 
 namespace Shared.Core.Domain.Rules.BaseEntityRules;
 

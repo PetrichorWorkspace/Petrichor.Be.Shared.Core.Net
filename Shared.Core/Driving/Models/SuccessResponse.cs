@@ -1,4 +1,4 @@
-﻿namespace Shared.Core.Drivings.Models;
+﻿namespace Shared.Core.Driving.Models;
 
 public class SuccessResponse<TResponse> : BaseResponse
 {

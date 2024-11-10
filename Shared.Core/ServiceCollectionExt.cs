@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Shared.Core.Drivings.Models;
+using Shared.Core.Driving.Models;
 
 namespace Shared.Core;
 

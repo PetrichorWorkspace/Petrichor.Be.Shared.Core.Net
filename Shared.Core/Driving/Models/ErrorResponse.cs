@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
 using Shared.Core.Domain.Exceptions;
 
-namespace Shared.Core.Drivings.Models;
+namespace Shared.Core.Driving.Models;
 
 public class ErrorResponse : BaseResponse
 {

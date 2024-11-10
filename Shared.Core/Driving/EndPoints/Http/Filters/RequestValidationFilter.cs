@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
-using Shared.Core.Drivings.Models;
+using Shared.Core.Driving.Models;
 
-namespace Shared.Core.Drivings.EndPoints.Http.Filters;
+namespace Shared.Core.Driving.EndPoints.Http.Filters;
 
 public class RequestValidationFilter<TRequest>(IValidator<TRequest>? validator = null) : IEndpointFilter
 {
