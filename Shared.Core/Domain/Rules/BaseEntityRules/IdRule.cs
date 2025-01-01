@@ -1,16 +1,17 @@
 ﻿using FluentValidation;
-using Shared.Core.Driven.Validators.Base;
 
 namespace Shared.Core.Domain.Rules.BaseEntityRules;
 
-public class IdRule : BaseNoParamValidator<string, IdRule>
+public static class IdRule
 {
     public const int MinLength = 6;
     public const int MaxLength = 255;
-    
-    public IdRule()
+
+    public static IRuleBuilderOptions<T, string> IdRuleValidator<T>(this IRuleBuilder<T, string> ruleBuilder)
     {
-        RuleFor(id => id)
+        return ruleBuilder
+            .NotNull()
+            .NotEmpty()
             .MinimumLength(MinLength)
             .MaximumLength(MaxLength);
     }

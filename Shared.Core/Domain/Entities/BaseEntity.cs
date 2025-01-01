@@ -1,5 +1,5 @@
-﻿using Shared.Core.Domain.Rules.BaseEntityRules;
-using Shared.Core.Driven.Validators.Base;
+﻿using FluentValidation;
+using Shared.Core.Domain.Rules.BaseEntityRules;
 
 namespace Shared.Core.Domain.Entities;
 
@@ -10,16 +10,15 @@ public abstract class BaseEntity
     public DateTime? LastModifiedAt { get; set; } = default;
 }
 
-public abstract class BaseEntityRule<TEntity, TEntityRule> : BaseNoParamValidator<TEntity, TEntityRule> 
-    where TEntityRule : BaseEntityRule<TEntity, TEntityRule>, new()
+public abstract class BaseEntityRule<TEntity> : AbstractValidator<TEntity>
     where TEntity : BaseEntity
 {
     protected BaseEntityRule()
     {
         RuleFor(e => e.Id)
-            .SetValidator(IdRule.Instance);
+            .IdRuleValidator();
         
         RuleFor(e => e.CreatedAt)
-            .SetValidator(CreatedAtRule.Instance);
+            .CreatedAtRuleValidator();
     }
 }

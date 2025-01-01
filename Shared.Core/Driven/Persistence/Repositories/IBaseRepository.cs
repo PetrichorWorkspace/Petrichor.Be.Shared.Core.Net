@@ -5,9 +5,9 @@ namespace Shared.Core.Driven.Persistence.Repositories;
 
 public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 {
-    Task<TEntity?> GetByIdAsync(string id, CancellationToken cancellationToken = default);
+    Task<TEntity?> GetByIdAsync(string id, CancellationToken ct = default);
 
-    Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<List<TEntity>> GetAllAsync(CancellationToken ct = default);
 
-    ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
+    ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity, CancellationToken ct = default);
 }

@@ -3,10 +3,20 @@ using Shared.Core.Domain.Exceptions;
 
 namespace Shared.Core.Driving.Models;
 
+public record Error
+{
+    public required string Field { get; init; }
+    public required List<ErrorContent> Errors { get; init; }
+}
+
+public record ErrorContent
+{
+    public required string Code { get; init; }
+    public required string Message { get; init; }
+}
+
 public class ErrorResponse : BaseResponse
 {
-    public const string FluentValidationMessagePartToRemove = nameof(FluentValidationMessagePartToRemove);
-    
     public required List<Error> Errors { get; init; }
 
     public static ErrorResponse ToErrorResponse(ValidationResult validationResult)
@@ -15,7 +25,7 @@ public class ErrorResponse : BaseResponse
         {
             Message = "Errors have occurred.", // TODO find a way to store the response message
             Errors = validationResult.Errors
-                .GroupBy(e => e.PropertyName)
+                .GroupBy(failure => failure.PropertyName)
                 .Select(group =>
                 {
                     #region Validation
@@ -28,28 +38,29 @@ public class ErrorResponse : BaseResponse
                     
                     return new Error
                     {
+                        // TODO field name is uppercase fist char
                         Field = group.Key,
                         Errors = group.Select(error =>
                         {
                             #region Validation
 
-                            if (string.IsNullOrWhiteSpace(error.ErrorCode))
-                                // TODO log here
-                                throw new Exception($"{nameof(error.ErrorCode)} is required.");
-
-                            if (string.IsNullOrWhiteSpace(error.ErrorMessage))
-                                // TODO log here
-                                throw new Exception($"{nameof(error.ErrorMessage)} is required.");
-
-                            if (error.ErrorMessage.Contains(error.PropertyName))
-                                // TODO log here
-                                throw new Exception($"{nameof(error.ErrorMessage)} should not contain {error.PropertyName}.");
+                            // if (string.IsNullOrWhiteSpace(error.ErrorCode))
+                            //     // TODO log here
+                            //     throw new Exception($"{nameof(error.ErrorCode)} is required.");
+                            //
+                            // if (string.IsNullOrWhiteSpace(error.ErrorMessage))
+                            //     // TODO log here
+                            //     throw new Exception($"{nameof(error.ErrorMessage)} is required.");
+                            //
+                            // if (error.ErrorMessage.Contains($"{error.PropertyName}")) // TODO this won't work: identity Id, not IdentityId
+                            //     // TODO log here
+                            //     throw new Exception($"{nameof(error.ErrorMessage)} must not contain the property name: {error.PropertyName}.");
 
                             #endregion
 
                             #region Custom FluentValidation Error Message
 
-                            error.ErrorMessage = error.ErrorMessage.Replace($"'{FluentValidationMessagePartToRemove}' ", string.Empty);
+                            // error.ErrorMessage = error.ErrorMessage.Replace($"''", group.Key);
 
                             #endregion
                             
@@ -64,26 +75,27 @@ public class ErrorResponse : BaseResponse
         };
     }
     
-    public static ErrorResponse ToErrorResponse(string fieldName, IExcHasErrorCode exc)
+    // TODO field name is uppercase fist char
+    public static ErrorResponse ToErrorResponse<TExc>(string fieldName, TExc exc) where TExc : IExcHasErrorCode
     {
         #region Validation
 
-        if (string.IsNullOrWhiteSpace(fieldName))
-            // TODO log here
-            throw new Exception($"{nameof(fieldName)} is required.");
-        
-        if (string.IsNullOrWhiteSpace(exc.Code))
-            // TODO log here
-            throw new Exception($"{nameof(exc.Code)} is required.");
-        
-        if (string.IsNullOrWhiteSpace(exc.Message))
-            // TODO log here
-            throw new Exception($"{nameof(exc.Message)} is required.");
-        
-        if (exc.Message.Contains(fieldName))
-            // TODO log here
-            throw new Exception($"{nameof(exc.Message)} should not contain {fieldName}.");
-        
+        // if (string.IsNullOrWhiteSpace(fieldName))
+        //     // TODO log here
+        //     throw new Exception($"{nameof(fieldName)} is required.");
+        //
+        // if (string.IsNullOrWhiteSpace(exc.Code))
+        //     // TODO log here
+        //     throw new Exception($"{nameof(exc.Code)} is required.");
+        //
+        // if (string.IsNullOrWhiteSpace(exc.Message))
+        //     // TODO log here
+        //     throw new Exception($"{nameof(exc.Message)} is required.");
+        //
+        // if (!exc.Message.Contains($"'{fieldName}'"))
+        //     // TODO log here
+        //     throw new Exception($"{nameof(exc.Message)} must contain '{fieldName}'.");
+
         #endregion
         
         return new ErrorResponse
@@ -106,16 +118,4 @@ public class ErrorResponse : BaseResponse
             ]
         };
     }
-}
-
-public record Error
-{
-    public required string Field { get; init; }
-    public required List<ErrorContent> Errors { get; init; }
-}
-
-public record ErrorContent
-{
-    public required string Code { get; init; }
-    public required string Message { get; init; }
 }

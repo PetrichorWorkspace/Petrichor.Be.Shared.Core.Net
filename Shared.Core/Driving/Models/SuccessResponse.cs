@@ -1,6 +1,6 @@
 ﻿namespace Shared.Core.Driving.Models;
 
-public class SuccessResponse<TResponse> : BaseResponse
+public class SuccessResponse<TData> : BaseResponse
 {
-    public TResponse? Response { get; init; } = default;
+    public TData? Data { get; init; } = default;
 }

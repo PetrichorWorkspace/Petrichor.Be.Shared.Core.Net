@@ -1,13 +1,14 @@
 ﻿using FluentValidation;
-using Shared.Core.Driven.Validators.Base;
 
 namespace Shared.Core.Domain.Rules.BaseEntityRules;
 
-public class CreatedAtRule : BaseNoParamValidator<DateTime, CreatedAtRule>
+public static class CreatedAtRule
 {
-    public CreatedAtRule()
+    public static IRuleBuilderOptions<T, DateTime> CreatedAtRuleValidator<T>(this IRuleBuilder<T, DateTime> ruleBuilder)
     {
-        RuleFor(createdAt => createdAt)
+        return ruleBuilder
+            .NotNull()
+            .NotEmpty()
             .LessThanOrEqualTo(_ => DateTime.Now)
             .WithMessage("must be less than or equal to current time.");
     }

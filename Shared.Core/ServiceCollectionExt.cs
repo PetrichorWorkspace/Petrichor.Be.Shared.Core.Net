@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
-using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Shared.Core.Driving.Models;
+using Shared.Core.Driven.Validators;
 
 namespace Shared.Core;
 
@@ -22,12 +21,6 @@ public static class ServiceCollectionExt
 {
     public static void AddSharedCoreService(this IServiceCollection services, Assembly currentAssembly)
     {
-        #region FluentValidation
-
-        // TODO need to explain this FluentValidationMessagePartToRemove
-        ValidatorOptions.Global.DisplayNameResolver = (_, _, _) => ErrorResponse.FluentValidationMessagePartToRemove;
-        services.AddValidatorsFromAssembly(currentAssembly);
-
-        #endregion
+        services.AddFluentValidationServices(currentAssembly);
     }
 }
