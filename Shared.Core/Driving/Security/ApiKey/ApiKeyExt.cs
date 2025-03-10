@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 
-namespace Shared.Core.Driving.Auth.ApiKey;
+namespace Shared.Core.Driving.Security.ApiKey;
 
 public static class ApiKeyExt
 {

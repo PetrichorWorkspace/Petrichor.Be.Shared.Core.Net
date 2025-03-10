@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Shared.Core.Driving.Auth.ApiKey;
+namespace Shared.Core.Driving.Security.ApiKey;
 
 public class ApiKeyAuthenticationHandler(
     IOptionsMonitor<ApiKeyAuthenticationSchemeOptions> options,
@@ -22,17 +22,17 @@ public class ApiKeyAuthenticationHandler(
         if (string.IsNullOrWhiteSpace(apiKeyHeaderName))
         {
             // TODO add logging
-            throw new Exception("apiKeyHeaderName must be provided in appsettings"); // TODO find a better exception
+            Logger.LogError("");
+            throw new ArgumentNullException($"{nameof(apiKeyHeaderName)} is missing, please provide it in the configuration");
         }
-
+    
         var actualApiKey = Request.Headers[apiKeyHeaderName];
-        if (string.IsNullOrWhiteSpace(actualApiKey))
+        var expectedApiKey = configuration[$"Authentication:Schemes:{Scheme.Name}:{_options.CurrentValue.InAppSettingsName}"];
+        if (string.IsNullOrWhiteSpace(expectedApiKey))
         {
             // TODO add logging
-            throw new Exception("ApiKey must be provided in appsettings"); // TODO find a better exception
+            throw new ArgumentNullException($"{nameof(expectedApiKey)} is missing, please provide it in the configuration");
         }
-        
-        var expectedApiKey = configuration[$"Authentication:Schemes:{Scheme.Name}:{_options.CurrentValue.InAppSettingsName}"];
         
         if (actualApiKey != expectedApiKey)
             // TODO consider the response
