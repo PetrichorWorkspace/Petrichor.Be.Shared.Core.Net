@@ -7,7 +7,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
         <PackageId>Petrichor.Be.Shared.Core.Net</PackageId>
-        <Version>0.0.3</Version>
+        <Version>0.0.4</Version>
         <Authors>vupham04112002</Authors>
         <Company>Petrichor</Company>
         <RepositoryUrl>https://github.com/PetrichorWorkspace/Petrichor.Be.Shared.Core.Net</RepositoryUrl>
