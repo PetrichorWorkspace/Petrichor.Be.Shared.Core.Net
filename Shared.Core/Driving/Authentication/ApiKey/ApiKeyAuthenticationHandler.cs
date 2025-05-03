@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Shared.Core.Driving.Security.ApiKey;
+namespace Shared.Core.Driving.Authentication.ApiKey;
 
 public class ApiKeyAuthenticationHandler(
     IOptionsMonitor<ApiKeyAuthenticationSchemeOptions> options,

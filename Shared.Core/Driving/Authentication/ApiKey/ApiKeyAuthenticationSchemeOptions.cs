@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 
-namespace Shared.Core.Driving.Security.ApiKey;
+namespace Shared.Core.Driving.Authentication.ApiKey;
 
 public class ApiKeyAuthenticationSchemeOptions : AuthenticationSchemeOptions
 {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Shared.Core.Driving.Models;
 
-namespace Shared.Core.Driving.EndPoints.Http.Filters;
+namespace Shared.Core.Driving.RequestValidation.Http;
 
 public class RequestValidationFilter<TRequest>(IValidator<TRequest>? validator = null) : IEndpointFilter
 {

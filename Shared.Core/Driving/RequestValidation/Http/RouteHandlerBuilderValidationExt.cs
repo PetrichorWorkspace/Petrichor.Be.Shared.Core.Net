@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Shared.Core.Driving.EndPoints.Http.Filters;
 
-namespace Shared.Core.Driving.EndPoints.Http.Extensions;
+namespace Shared.Core.Driving.RequestValidation.Http;
 
 public static class RouteHandlerBuilderValidationExt
 {
